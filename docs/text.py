@@ -1,3 +1,4 @@
+# from blacksheep import text
 from blacksheep.server.openapi.common import (
     ContentInfo,
     EndpointDocs,
@@ -6,6 +7,7 @@ from blacksheep.server.openapi.common import (
     ResponseExample,
     ResponseInfo,
 )
+from app import text_classifier
 from domain.text import TextClassifier, Type_of_df
 
 # create_token = EndpointDocs(
@@ -37,26 +39,25 @@ from domain.text import TextClassifier, Type_of_df
 #         422: "Please input valid Token Address!"
 #     },
 # )
-Text = EndpointDocs(
-    summary="Update token notification",
+Text_show = EndpointDocs(
+    summary="show text and type",
     request_body=RequestBodyInfo(
         examples={
             "v1": TextClassifier(
-                Text='Yeah he got in at 2 and was v apologetic.',
-                is_paused=True
+                Text='Yeah he got in at 2 and was v apologetic.'
             ),
         },
     ),
     responses={
         200: ResponseInfo(
-            "Successfully pausing / resuming token notification",
+            "Successfully get / text and type",
             content=[
                 ContentInfo(
-                    Text,
+                    text_classifier,
                     examples=[
                         ResponseExample(
                             {
-                                'message': "Token buy notification successfully paused!"
+                                'message': "Text successfully show!"
                             }
                         )
                     ],
@@ -64,4 +65,9 @@ Text = EndpointDocs(
             ],
         ),
     },
+)
+
+
+Text_show = EndpointDocs(
+    summary="this is a text wahat i build"
 )

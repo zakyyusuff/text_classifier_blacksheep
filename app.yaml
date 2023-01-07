@@ -1,0 +1,43 @@
+# openapi: 3.0.3
+# info:
+#     title: Example API
+#     version: 0.0.1
+# paths:
+#     /foo:
+#         get:
+#             responses:
+#                 '200':
+#                     description: Success response
+#                     content:
+#                         application/json:
+#                             schema:
+#                                 $ref: '#/components/schemas/Foo'
+#             operationId: give_type
+# servers: []
+# components:
+#     schemas:
+#         Foo:
+#             type: object
+#             required:
+#             - text
+#             properties:
+#                 foo:
+#                     type: string
+#                     nullable: false
+# /////////////////////////////////////////
+{
+  "environments": {
+    "test": {
+      "scripts": {
+        "test-setup": "pip install -r requirements.txt",
+        "test": "pytest --tap-stream slow-tests.py"
+      },
+      "formation": {
+          "test": {
+            "quantity": 1
+          }
+      }
+    }
+  },
+  "buildpacks": [{ "url": "heroku/python" }]
+}

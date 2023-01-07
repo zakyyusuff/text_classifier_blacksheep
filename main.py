@@ -15,4 +15,4 @@ if __name__ == "__main__":
     uvicorn.run("app:app", reload=True)
 
 # run blacksheep:
-#   uvicorn server:app --port 44777 --reload
+#   uvicorn server:app --port 8080 --reload

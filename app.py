@@ -1,16 +1,15 @@
 import pandas as pd
 from pandas import DataFrame
 import nltk
-import numpy as np
-# from sklearn.metrics import accuracy_score
-from datetime import datetime
 from blacksheep import Application
-from blacksheep import Application, status_code
-from openapidocs.v3 import Info
+from blacksheep import status_code
 from main import *
 
 app = Application()
 
+# docs = OpenAPIHandler(info=Info(title="Example API", version="0.0.1"))
+# docs.bind_app(app)
+df = pd.read_csv('spam.csv', encoding='ISO-8859-1')
 
 # @app.route("/get_feature")
 def get_feature(text):
@@ -80,17 +79,27 @@ def show_type_of_text(text, texts=False, show_acc=False):
     print(f'{text}: {clf}')
     classifier.show_most_informative_features(10)
     # return status_code(200, message={'message': classifier.show_most_informative_features(10)})
-    # return status_code(200, message={'message': f'{f}: {df}'})
+    return status_code(200, message={'message': f'{f}: {df}'})
 
+# @docs(responses={200: "Returns a text saying OpenAPI Example"})
 @app.route("/give_type")
 def give_type(type1='spam', type2='ham'):
     data = get_data(df, get_feature)
     classifier = nltk.NaiveBayesClassifier.train(data)
     following = classifier.prob_classify({'ham':type2, 'spam':type1})
     x = following.generate()
-    print(f'{type2}: {type1}{x}')
-    return status_code(200, message={'message': f'{type2}: {type1}{x}'})
+    # print(f'{type2}: {type1}{x}')
+    return status_code(200, message={'message': f'{type2}: {type1}{x}{data}'})
+
+# if __name__ == '__main__':
+#     print(give_type)
+#     app.run()
+
 # //////////////////////////////////////////////////////////
+# import requests
+# api_url = "https://nameless-mountain-71986.herokuapp.com/"
+# response = requests.get(api_url)
+# response.json()
 # from datetime import datetime
 # from blacksheep import Application
 
