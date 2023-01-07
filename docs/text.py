@@ -68,6 +68,6 @@ Text_show = EndpointDocs(
 )
 
 
-Text_show = EndpointDocs(
-    summary="this is a text wahat i build"
-)
+# Text_show = EndpointDocs(
+#     summary="this is a text wahat i build"
+# )
