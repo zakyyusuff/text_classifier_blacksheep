@@ -82,7 +82,7 @@ def show_type_of_text(text, texts=False, show_acc=False):
     return status_code(200, message={'message': f'{f}: {df}'})
 
 # @docs(responses={200: "Returns a text saying OpenAPI Example"})
-@app.route("/give_type")
+@app.route.get("/give_type")
 def give_type(type1='spam', type2='ham'):
     data = get_data(df, get_feature)
     classifier = nltk.NaiveBayesClassifier.train(data)
@@ -92,7 +92,8 @@ def give_type(type1='spam', type2='ham'):
     return status_code(200, message={'message': f'{type2}: {type1}{x}{data}'})
 
 # if __name__ == '__main__':
-#     print(give_type)
+#     # print(give_type)
+#     give_type(type1="spam")
 #     app.run()
 
 # //////////////////////////////////////////////////////////
